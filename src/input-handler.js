@@ -1,4 +1,5 @@
 import { readdir } from 'fs/promises'
+import { add } from './utils/add.js'
 import { cat } from './utils/cat.js'
 
 export const inputHandler = async (userInput) => {
@@ -20,6 +21,10 @@ export const inputHandler = async (userInput) => {
 
     case 'cat': 
       await cat(secondArg)
+      break
+
+    case 'add':
+      await add(secondArg)
       break
 
     default:
