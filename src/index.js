@@ -4,7 +4,7 @@ import { oneStep } from './one-step.js'
 
 process.chdir(homeDir)
 
-const rl = readline.createInterface({
+export const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
