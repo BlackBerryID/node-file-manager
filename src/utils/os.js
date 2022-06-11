@@ -1,4 +1,4 @@
-import { EOL, cpus } from 'os'
+import { EOL, cpus, homedir } from 'os'
 
 export const getEOL = () => {
   console.log(JSON.stringify(EOL))
@@ -11,4 +11,8 @@ export const getCPUS = () => {
   }))
   console.log(`Amount of CPUS: ${cpuCores.length}`)
   console.table(cpuCores, ['model', 'clockRateInGHz'])
+}
+
+export const getHomeDir = () => {
+  console.log(homedir())
 }

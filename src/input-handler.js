@@ -5,7 +5,7 @@ import { renameFile } from './utils/rename.js'
 import { copy } from './utils/copy.js'
 import { move } from './utils/move.js'
 import { remove } from './utils/delete.js'
-import { getEOL, getCPUS } from './utils/os.js'
+import { getEOL, getCPUS, getHomeDir } from './utils/os.js'
 
 export const inputHandler = async (userInput) => {
   const [firstArg, ...args] = userInput.split(' ')
@@ -56,6 +56,10 @@ export const inputHandler = async (userInput) => {
       
         case '--cpus':
           getCPUS()
+          break
+
+        case '--homedir': 
+          getHomeDir()
           break
 
         default:
