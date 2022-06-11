@@ -2,6 +2,7 @@ import { readdir } from 'fs/promises'
 import { create } from './utils/create.js'
 import { read } from './utils/read.js'
 import { renameFile } from './utils/rename.js'
+import { copy } from './utils/copy.js'
 
 export const inputHandler = async (userInput) => {
   const [firstArg, ...args] = userInput.split(' ')
@@ -30,6 +31,10 @@ export const inputHandler = async (userInput) => {
 
     case 'rn':
       await renameFile(...args)
+      break
+
+    case 'cp':
+      await copy(...args)
       break
 
     default:
