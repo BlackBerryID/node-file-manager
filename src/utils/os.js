@@ -1,4 +1,4 @@
-import { EOL, cpus, homedir } from 'os'
+import { EOL, cpus, homedir, userInfo } from 'os'
 
 export const getEOL = () => {
   console.log(JSON.stringify(EOL))
@@ -15,4 +15,8 @@ export const getCPUS = () => {
 
 export const getHomeDir = () => {
   console.log(homedir())
+}
+
+export const getSystemUserName = () => {
+  console.log(userInfo().username)
 }
