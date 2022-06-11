@@ -6,6 +6,7 @@ import { copy } from './utils/copy.js'
 import { move } from './utils/move.js'
 import { remove } from './utils/delete.js'
 import { getEOL, getCPUS, getHomeDir, getSystemUserName, getArchitecture } from './utils/os.js'
+import { calcHash } from './utils/hash.js'
 
 export const inputHandler = async (userInput) => {
   const [firstArg, ...args] = userInput.split(' ')
@@ -74,6 +75,10 @@ export const inputHandler = async (userInput) => {
           console.log('\x1b[31m%s\x1b[0m', 'Invalid input')
           break
       }
+      break
+
+    case 'hash':
+      await calcHash(...args)
       break
 
     default:
