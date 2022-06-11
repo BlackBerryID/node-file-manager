@@ -5,6 +5,7 @@ import { renameFile } from './utils/rename.js'
 import { copy } from './utils/copy.js'
 import { move } from './utils/move.js'
 import { remove } from './utils/delete.js'
+import { getEOL } from './utils/os.js'
 
 export const inputHandler = async (userInput) => {
   const [firstArg, ...args] = userInput.split(' ')
@@ -45,6 +46,18 @@ export const inputHandler = async (userInput) => {
 
     case 'rm':
       await remove(...args)
+      break
+
+    case 'os':
+      switch ([...args][0]) {
+        case '--EOL':
+          getEOL()
+          break
+      
+        default:
+          console.log('\x1b[31m%s\x1b[0m', 'Invalid input')
+          break
+      }
       break
 
     default:
