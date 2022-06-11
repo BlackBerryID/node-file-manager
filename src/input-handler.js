@@ -7,6 +7,8 @@ import { move } from './utils/move.js'
 import { remove } from './utils/delete.js'
 import { getEOL, getCPUS, getHomeDir, getSystemUserName, getArchitecture } from './utils/os.js'
 import { calcHash } from './utils/hash.js'
+import { compress } from './utils/compress.js'
+import { decompress } from './utils/decompress.js'
 
 export const inputHandler = async (userInput) => {
   const [firstArg, ...args] = userInput.split(' ')
@@ -79,6 +81,14 @@ export const inputHandler = async (userInput) => {
 
     case 'hash':
       await calcHash(...args)
+      break
+
+    case 'compress':
+      await compress(...args)
+      break
+
+    case 'decompress':
+      await decompress(...args)
       break
 
     default:
