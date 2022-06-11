@@ -11,6 +11,7 @@ export const oneStep = async (userInput) => {
   try {
     await inputHandler(userInput)
   } catch (err) {
+    console.log(err)
     console.log('\x1b[31m%s\x1b[0m', 'Operation failed')
   }
 

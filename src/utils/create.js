@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs'
 
-export const add = async (newFileName) => {
+export const create = async (newFileName) => {
   return new Promise ((resolve, reject) => {
     const ws = createWriteStream(newFileName)
     ws.end()

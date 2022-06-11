@@ -1,9 +1,10 @@
 import { readdir } from 'fs/promises'
-import { add } from './utils/add.js'
-import { cat } from './utils/cat.js'
+import { create } from './utils/create.js'
+import { read } from './utils/read.js'
+import { renameFile } from './utils/rename.js'
 
 export const inputHandler = async (userInput) => {
-  const [firstArg, secondArg] = userInput.split(' ')
+  const [firstArg, ...args] = userInput.split(' ')
   switch (firstArg) {
 
     case 'up':
@@ -11,7 +12,7 @@ export const inputHandler = async (userInput) => {
       break
 
     case 'cd':
-      process.chdir(secondArg)
+      process.chdir(...args)
       break
 
     case 'ls':
@@ -20,11 +21,15 @@ export const inputHandler = async (userInput) => {
       break
 
     case 'cat': 
-      await cat(secondArg)
+      await read(...args)
       break
 
     case 'add':
-      await add(secondArg)
+      await create(...args)
+      break
+
+    case 'rn':
+      await renameFile(...args)
       break
 
     default:
