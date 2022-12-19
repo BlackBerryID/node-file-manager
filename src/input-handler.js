@@ -1,4 +1,4 @@
-import { readdir } from 'fs/promises'
+import { readdir, stat } from 'fs/promises'
 import { create } from './utils/create.js'
 import { read } from './utils/read.js'
 import { renameFile } from './utils/rename.js'
@@ -24,7 +24,16 @@ export const inputHandler = async (userInput) => {
 
     case 'ls':
       const files = await readdir(process.cwd())
-      console.table(files)
+      let filesTypes = await Promise.all(files.map(async (item) => (await stat(item)).isDirectory()))
+      filesTypes = filesTypes.map(item => item ? 'directory' : 'file')
+      const resultTable = files.reduce((acc, current, index) => {
+        acc.push({
+          Name: current,
+          File: filesTypes[index]
+        })
+        return acc
+      }, [])
+      console.table(resultTable)
       break
 
     case 'cat': 
