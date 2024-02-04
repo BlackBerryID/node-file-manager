@@ -2,7 +2,7 @@ import * as readline from 'readline/promises';
 import { stdin as input, stdout as output } from 'process';
 import { homedir } from 'os';
 import { getUsernameFromArgs, handleError } from './utils/index.js';
-import { up, cd, ls, cat } from './commands/index.js';
+import { up, cd, ls, cat, add } from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
 let currentPath = homedir();
@@ -34,13 +34,17 @@ rl.on('line', (async input => {
       case 'cat':
         await cat(currentPath, arg1);
         break;
-    
+      case 'add':
+        await add(currentPath, arg1);
+        break;
+
       default:
         console.log('Invalid input');
     }
   
     console.log(`You are currently in ${currentPath} \n`);
   } catch (err) {
+    console.log('err: ', err)
     handleError(err);
   }
 
