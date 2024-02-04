@@ -5,12 +5,12 @@ import { pipeline } from "stream/promises"
 export const cp = async (currentPath, pathToFile, pathToNewDirectory) => {
   const resolvedOldPathToFile = resolve(currentPath, pathToFile)
   const fileName = basename(resolvedOldPathToFile)
-  const dirPath = dirname(resolvedOldPathToFile)
+  // const dirPath = dirname(resolvedOldPathToFile)
 
-  const resolvedNewPath = resolve(dirPath, pathToNewDirectory, fileName)
+  const resolvedNewPath = resolve(currentPath, pathToNewDirectory, fileName)
 
   const rs = createReadStream(resolvedOldPathToFile)
-  const ws = createWriteStream(resolvedNewPath)
+  const ws = createWriteStream(resolvedNewPath, {flags: 'wx'})
 
   await pipeline(rs, ws)
 }

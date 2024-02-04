@@ -2,7 +2,7 @@ import * as readline from 'readline/promises';
 import { stdin as input, stdout as output } from 'process';
 import { homedir } from 'os';
 import { getUsernameFromArgs, handleError } from './utils/index.js';
-import { up, cd, ls, cat, add, rn, cp } from './commands/index.js';
+import { up, cd, ls, cat, add, rn, cp, rm } from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
 let currentPath = homedir();
@@ -42,6 +42,13 @@ rl.on('line', (async input => {
         break;
       case 'cp':
         await cp(currentPath, arg1, arg2);
+        break;
+      case 'mv':
+        await cp(currentPath, arg1, arg2);
+        await rm(currentPath, arg1);
+        break;
+      case 'rm':
+        await rm(currentPath, arg1);
         break;
 
       default:
