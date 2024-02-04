@@ -4,7 +4,7 @@ import { handleError } from "../utils/index.js";
 
 export const cat = (currentPath, pathToFile) => {
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const rs = createReadStream(resolvePath(currentPath, pathToFile));
   
     let data = '';
@@ -19,8 +19,7 @@ export const cat = (currentPath, pathToFile) => {
     })
 
     rs.on('error', (err) => {
-      handleError(err)
-      resolve()
+      reject(err)
     })
   })
 }

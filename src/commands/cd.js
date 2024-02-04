@@ -9,6 +9,6 @@ export const cd = async (currentPath, destinationPath) => {
 
     return resolvedPath;
   } catch (err) {
-    handleError(err);
+    throw err
   }
 }
