@@ -1,8 +1,8 @@
 import * as readline from 'readline/promises';
 import { stdin as input, stdout as output } from 'process';
-import { getUsernameFromArgs, getCurrentDirPath, getRootDirPath } from './utils/index.js';
 import { homedir } from 'os';
-import { resolve } from 'path';
+import { getUsernameFromArgs } from './utils/index.js';
+import { up, cd } from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
 let currentPath = homedir();
@@ -12,21 +12,20 @@ const welcomePhrase = `Welcome to the File Manager, ${userNameFromArgs}! \n`;
 console.log(welcomePhrase);
 console.log(`You are currently in ${currentPath} \n`);
 
-// console.log('getCurrentDirPath: ', getCurrentDirPath(import.meta.url))
-
-// rl.setPrompt(`You are currently in ${currentPath} \n`)
-
-// const w = rl.prompt()
-
 rl.on('line', (input => {
 
+  const [command, arg1, arg2] = input.trim().split(' ');
+
   try {
-    switch (input.trim()) {
+    switch (command) {
       case '.exit':
         rl.close();
         return;
       case 'up':
-        currentPath = resolve(currentPath, '../');
+        currentPath = up(currentPath);
+        break;
+      case 'cd':
+        currentPath = cd(currentPath, arg1);
         break;
     
       default:
