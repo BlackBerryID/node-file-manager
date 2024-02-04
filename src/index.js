@@ -2,7 +2,7 @@ import * as readline from 'readline/promises';
 import { stdin as input, stdout as output } from 'process';
 import { homedir } from 'os';
 import { getUsernameFromArgs } from './utils/index.js';
-import { up, cd } from './commands/index.js';
+import { up, cd, ls } from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
 let currentPath = homedir();
@@ -12,7 +12,7 @@ const welcomePhrase = `Welcome to the File Manager, ${userNameFromArgs}! \n`;
 console.log(welcomePhrase);
 console.log(`You are currently in ${currentPath} \n`);
 
-rl.on('line', (input => {
+rl.on('line', (async input => {
 
   const [command, arg1, arg2] = input.trim().split(' ');
 
@@ -27,6 +27,9 @@ rl.on('line', (input => {
       case 'cd':
         currentPath = cd(currentPath, arg1);
         break;
+      case 'ls':
+        await ls(currentPath);
+        break;
     
       default:
         console.log('Invalid input');
@@ -34,7 +37,7 @@ rl.on('line', (input => {
   
     console.log(`You are currently in ${currentPath} \n`);
   } catch (err) {
-    console.log('Operation failed');
+    console.log('Operation failed', err);
   }
 
 }))
