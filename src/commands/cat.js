@@ -1,6 +1,5 @@
 import { createReadStream } from "fs"
 import { resolve as resolvePath } from 'path';
-import { handleError } from "../utils/index.js";
 
 export const cat = (currentPath, pathToFile) => {
 

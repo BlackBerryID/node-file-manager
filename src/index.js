@@ -2,7 +2,21 @@ import * as readline from 'readline/promises';
 import { stdin as input, stdout as output } from 'process';
 import { homedir } from 'os';
 import { getUsernameFromArgs, handleError } from './utils/index.js';
-import { up, cd, ls, cat, add, rn, cp, rm } from './commands/index.js';
+import {
+  up,
+  cd,
+  ls,
+  cat,
+  add,
+  rn,
+  cp,
+  rm,
+  printCPUsInfo,
+  printEOL,
+  printHomeDir,
+  printUsername,
+  printArchitecture
+} from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
 let currentPath = homedir();
@@ -50,9 +64,33 @@ rl.on('line', (async input => {
       case 'rm':
         await rm(currentPath, arg1);
         break;
+      case 'os':
+        switch (arg1) {
+          case '--EOL':
+            printEOL();
+            break;
+          case '--cpus':
+            printCPUsInfo();
+            break;
+          case '--homedir':
+            printHomeDir();
+            break;
+          case '--username':
+            printUsername();
+            break;
+          case '--architecture':
+            printArchitecture();
+            break;
+        
+          default:
+            console.log('Invalid input');
+            break;
+        }
+        break;
 
       default:
         console.log('Invalid input');
+        break;
     }
   
     console.log(`You are currently in ${currentPath} \n`);
