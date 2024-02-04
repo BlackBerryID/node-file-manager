@@ -1,8 +1,8 @@
 import * as readline from 'readline/promises';
 import { stdin as input, stdout as output } from 'process';
 import { homedir } from 'os';
-import { getUsernameFromArgs } from './utils/index.js';
-import { up, cd, ls } from './commands/index.js';
+import { getUsernameFromArgs, handleError } from './utils/index.js';
+import { up, cd, ls, cat } from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
 let currentPath = homedir();
@@ -25,10 +25,14 @@ rl.on('line', (async input => {
         currentPath = up(currentPath);
         break;
       case 'cd':
-        currentPath = cd(currentPath, arg1);
+        const newPath = await cd(currentPath, arg1);
+        if (newPath) currentPath = newPath;
         break;
       case 'ls':
         await ls(currentPath);
+        break;
+      case 'cat':
+        await cat(currentPath, arg1);
         break;
     
       default:
@@ -37,7 +41,7 @@ rl.on('line', (async input => {
   
     console.log(`You are currently in ${currentPath} \n`);
   } catch (err) {
-    console.log('Operation failed', err);
+    handleError(err);
   }
 
 }))
