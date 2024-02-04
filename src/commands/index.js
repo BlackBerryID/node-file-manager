@@ -6,6 +6,7 @@ export * from './ls.js';
 export * from './rm.js';
 export * from './rn.js';
 export * from './up.js';
+export * from './hash.js';
 
 export * from './os/architecture.js';
 export * from './os/cpus.js';

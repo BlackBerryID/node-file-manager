@@ -15,7 +15,8 @@ import {
   printEOL,
   printHomeDir,
   printUsername,
-  printArchitecture
+  printArchitecture,
+  printFileHash
 } from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
@@ -86,6 +87,9 @@ rl.on('line', (async input => {
             console.log('Invalid input');
             break;
         }
+        break;
+      case 'hash':
+        await printFileHash(currentPath, arg1);
         break;
 
       default:
