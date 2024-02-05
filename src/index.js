@@ -108,8 +108,8 @@ rl.on('line', (async input => {
     console.log(`You are currently in ${currentPath} \n`);
   } catch (err) {
     handleError(err);
+    console.log(`You are currently in ${currentPath} \n`);
   }
-
 }))
 
 rl.on('close', () => {
