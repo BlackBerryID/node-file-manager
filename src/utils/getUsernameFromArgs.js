@@ -1,0 +1,1 @@
+export const getUsernameFromArgs = () => process.argv.at(-1).split('=')[1];
