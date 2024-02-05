@@ -16,7 +16,9 @@ import {
   printHomeDir,
   printUsername,
   printArchitecture,
-  printFileHash
+  printFileHash,
+  compress,
+  decompress
 } from './commands/index.js';
 
 const rl = readline.createInterface({ input, output });
@@ -91,6 +93,12 @@ rl.on('line', (async input => {
       case 'hash':
         await printFileHash(currentPath, arg1);
         break;
+      case 'compress':
+        await compress(currentPath, arg1, arg2);
+        break;
+      case 'decompress':
+        await decompress(currentPath, arg1, arg2);
+        break;
 
       default:
         console.log('Invalid input');
@@ -99,7 +107,6 @@ rl.on('line', (async input => {
   
     console.log(`You are currently in ${currentPath} \n`);
   } catch (err) {
-    // console.log('err: ', err)
     handleError(err);
   }
 

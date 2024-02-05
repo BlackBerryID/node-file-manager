@@ -13,3 +13,6 @@ export * from './os/cpus.js';
 export * from './os/eol.js';
 export * from './os/homedir.js';
 export * from './os/username.js';
+
+export * from './zip/compress.js';
+export * from './zip/decompress.js';
