@@ -1,11 +1,10 @@
 import { createBrotliCompress } from 'zlib';
 import { createWriteStream, createReadStream } from 'fs';
 import { stat } from 'fs/promises';
-import { extname, resolve, basename } from 'path';;
+import { resolve, basename } from 'path';;
 
 export const compress = async (currentPath, pathToFile, pathToDestination) => {
   const resolvedOldPathToFile = resolve(currentPath, pathToFile)
-  // const fileExtention = extname(resolvedOldPathToFile)
   const fileName = basename(resolvedOldPathToFile)
   const resolvedNewPathToDir = resolve(currentPath, pathToDestination)
   const pathToDestionationStatObject = await stat(resolvedNewPathToDir)
